@@ -48,6 +48,10 @@ setup(
         # override this
         'django-widget-tweaks>=1.4',
     ],
+    dependency_links=[
+        "https://github.com/adilshehzad786/Ryp-form",
+  
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
