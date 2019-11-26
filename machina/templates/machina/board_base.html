@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load forum_permission_tags %}
 
-{% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub_title %}{% endblock sub_title %}{% endblock title %}
+{% block title %}{{ RYP|default:"Rate Your Professor" }} &mdash; {% block sub_title %}{% endblock sub_title %}{% endblock title %}
 
 {% block css %}
 {{ block.super }}
@@ -14,7 +14,7 @@
 {% block body %}
 {% block header %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="{% url 'forum:index' %}">{% block brand %}{{ MACHINA_FORUM_NAME|default:"My forum" }}{% endblock %}</a>
+  <a class="navbar-brand" href="{% url 'forum:index' %}">{% block brand %}{{ RYP|default:"Rate Your Professor" }}{% endblock %}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,14 +23,33 @@
     <form class="form-inline my-2 ml-3 my-lg-0" role="search" action="{% url 'forum_search:search' %}">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
       <button class="btn btn-outline-light my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
+	  
     </form>
     <div class="navbar-nav mr-auto">
       <a class="nav-item nav-link" href="{% url 'forum_search:search' %}">{% trans "Advanced search" %}</a>
+	   {% if not user.is_authenticated %}
+	  <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+	  <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+	  {% endif %}
+	  <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+	  {% if user.is_authenticated %}
+	  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+	  {% endif %}
     </div>
     {% endblock header_collapse %}
   </div>
 </nav>
 {% endblock header %}
+{% if not user.is_authenticated %}
+        <div class="alert alert-success alert-dismissible fade show" role="success">
+
+  <strong>Hello Guest </strong> Forum is Hidden Beacuse of High User Privacy . Please Register Now !!
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+        {% endif %}
 <div class="my-5 container" id="main_container">
   <div class="row">
     <div class="col-12">
@@ -70,4 +89,5 @@
     {% block onbodyload %}{% endblock onbodyload %}
   });
 </script>
+
 {% endblock js %}
