@@ -2,12 +2,16 @@
 
 <!DOCTYPE html>
 <html {% get_current_language as LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}">
+
   <head>
     {% block head %}
+	 <link rel='shortcut icon' type='image/x-icon' href='/media/profile_pics/favicon.ico' />
+	 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
+	 
     <meta name="created" content="{% now "jS M Y h:i" %}" />
     <meta name="description" content="{% block meta_description %}{% endblock meta_description %}" />
     <meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}"/>
@@ -35,5 +39,6 @@
 
     {% block extra_js %}
     {% endblock extra_js %}
+	
   </body>
 </html>
